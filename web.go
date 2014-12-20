@@ -25,6 +25,7 @@ func readMsg(w http.ResponseWriter, r *http.Request) {
 	} else {
 		lp := lpx.NewReader(bufio.NewReader(r.Body))
 		for lp.Next() {
+			fmt.Println(lp.Header().Name)
 			if string(lp.Header().Name) == "router" {
 				fmt.Println("Got router line with " + string(len(lp.Bytes())) + " bytes")
 			}
