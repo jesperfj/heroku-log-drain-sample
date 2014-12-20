@@ -1,11 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"github.com/bmizerany/lpx"
+	"io/ioutil"
 	"net/http"
 	"os"
-	"bufio"
-	"github.com/bmizerany/lpx"
 )
 
 func main() {
@@ -18,10 +19,15 @@ func main() {
 }
 
 func readMsg(w http.ResponseWriter, r *http.Request) {
-	lp := lpx.NewReader(bufio.NewReader(r.Body))
-	for lp.Next() {
-		if string(lp.Header().Name) == "router" {
-			fmt.Println("Got router line with "+string(len(lp.Bytes()))+" bytes")
+	if os.Getenv("DEBUG") == "true" {
+		arr, _ := ioutil.ReadAll(r.Body)
+		fmt.Println(string(arr))
+	} else {
+		lp := lpx.NewReader(bufio.NewReader(r.Body))
+		for lp.Next() {
+			if string(lp.Header().Name) == "router" {
+				fmt.Println("Got router line with " + string(len(lp.Bytes())) + " bytes")
+			}
 		}
 	}
 }
