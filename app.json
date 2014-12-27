@@ -1,6 +1,6 @@
 {
 	"name": "Heroku Log Drain Sample App",
-	"description": "A Go app demonstrating how to receive and process logs from Heroku apps via Heroku's Logplex service. This sample uses Redis to count requests per minute and total requests grouped by host name.",
+	"description": "A Go app demonstrating how to receive and process logs from Heroku apps via Heroku's Logplex service",
 	"env": {
 		"BUILDPACK_URL": "https://github.com/kr/heroku-buildpack-go.git",
 		"AUTH_SECRET": {
