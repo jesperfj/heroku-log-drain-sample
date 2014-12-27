@@ -16,7 +16,7 @@ This repo is an example of an HTTP based log drain that you can add to any Herok
 
 You'll need to run this app somewhere. It doesn't have to be run on Heroku, but it's probably the easiest option:
 
-[button]
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/heroku/node-js-sample)
 
 # Add to your apps
 
