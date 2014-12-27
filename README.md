@@ -23,7 +23,7 @@ You'll need to run this app somewhere. It doesn't have to be run on Heroku, but 
 To forward logs from one of your Heroku apps to this drain app, you can add a drain like this:
 
 ```
-heroku drains:add -a myapp https://user:$(heroku config:get AUTH_SECRET -a drainapp)@herokuapp.com/log
+heroku drains:add -a myapp https://user:$(heroku config:get AUTH_SECRET -a mydrainapp)@mydrainapp.herokuapp.com/log
 ```
 
-where drainapp app is the app name of your deployment of this repo to Heroku. This presumes that you've deployed this app successfully (using Heroku button or other means).
+where mydrainapp app is the app name of your deployment of this repo to Heroku. This presumes that you've deployed this app successfully (using Heroku button or other means).
