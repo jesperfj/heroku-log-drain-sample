@@ -1,10 +1,10 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"github.com/garyburd/redigo/redis"
 	"net/http"
+	"encoding/json"
+	"github.com/garyburd/redigo/redis"
 )
 
 func statsForAllHosts(w http.ResponseWriter, r *http.Request) {
