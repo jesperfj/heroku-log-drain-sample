@@ -5,6 +5,18 @@
 		{
 			"ImportPath": "github.com/bmizerany/lpx",
 			"Rev": "af85cf24c1567bcb5a2e4c21597cc049eab31f55"
+		},
+		{
+			"ImportPath": "github.com/garyburd/redigo/internal",
+			"Rev": "3235c235f38bd5b41bd9eef26edbfad396be6274"
+		},
+		{
+			"ImportPath": "github.com/garyburd/redigo/redis",
+			"Rev": "3235c235f38bd5b41bd9eef26edbfad396be6274"
+		},
+		{
+			"ImportPath": "github.com/kr/logfmt",
+			"Rev": "b84e30acd515aadc4b783ad4ff83aff3299bdfe0"
 		}
 	]
 }
