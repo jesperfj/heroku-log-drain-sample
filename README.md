@@ -27,3 +27,19 @@ heroku drains:add -a myapp https://user:$(heroku config:get AUTH_SECRET -a mydra
 ```
 
 where mydrainapp app is the app name of your deployment of this repo to Heroku. This presumes that you've deployed this app successfully (using Heroku button or other means).
+
+# Get Stats
+
+You can attach this drain app to many apps. It will count number of requests and group them by domain name. If you have one app that receives requests on multiple domains, they will be counted separately. You can get a list of all domains along with total request count like this:
+
+```
+curl -u user:$(heroku config:get AUTH_SECRET -a mydrainapp) https://mydrainapp.herokuapp.com/stats/hosts
+{ "my.domain.com": 7654321, "my.otherdomain.com": 1234567, ...}
+```
+
+and you can get request count per minute for a single domain like this:
+
+```
+curl -u user:$(heroku config:get AUTH_SECRET -a mydrainapp) https://mydrainapp.herokuapp.com/stats/host/my.domain.com
+{"1419707700":"1234","1419707760":"4321",...}
+```
