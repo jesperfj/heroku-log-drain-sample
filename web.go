@@ -27,9 +27,11 @@ func main() {
 
 	defer redisPool.Close()
 
-	http.HandleFunc("/log", checkAuth(os.Getenv("AUTH_SECRET"), processLogs))
-	http.HandleFunc("/stats/hosts", checkAuth(os.Getenv("AUTH_SECRET"), statsForAllHosts))
-	http.HandleFunc("/stats/host/", checkAuth(os.Getenv("AUTH_SECRET"), bucketDataForHost))
+	auth := checkAuth(os.Getenv("AUTH_SECRET"))
+
+	http.HandleFunc("/log", auth, processLogs))
+	http.HandleFunc("/stats/hosts", auth, statsForAllHosts))
+	http.HandleFunc("/stats/host/", auth, bucketDataForHost))
 	fmt.Println("listening...")
 	err := http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 	if err != nil {
