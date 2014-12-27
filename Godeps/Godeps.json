@@ -17,6 +17,10 @@
 		{
 			"ImportPath": "github.com/kr/logfmt",
 			"Rev": "b84e30acd515aadc4b783ad4ff83aff3299bdfe0"
+		},
+		{
+			"ImportPath": "github.com/soveran/redisurl",
+			"Rev": "ac42ec99510b5f21d11560d316adcc5bc41f0915"
 		}
 	]
 }

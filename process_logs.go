@@ -9,9 +9,9 @@ import (
 	"time"
 )
 
-// This struct and the method below takes care of capturing what we care about
-// from each log line. We pass it to Keith Rarick's logfmt parser and it takes
-// care of the rest.
+// This struct and the method below takes care of capturing the data we need
+// from each log line. We pass it to Keith Rarick's logfmt parser and it
+// handles parsing for us.
 type routerLog struct {
 	host string
 }

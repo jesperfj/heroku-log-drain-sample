@@ -1,5 +1,5 @@
 package main
-	
+
 import (
 	"encoding/json"
 	"fmt"
@@ -78,7 +78,7 @@ func bucketDataForHost(w http.ResponseWriter, r *http.Request) {
 		keyBytes := key.([]byte)
 
 		// extract minute bucket from key
-		minuteBucket := string(keyBytes[len(host)+1:len(keyBytes)])
+		minuteBucket := string(keyBytes[len(host)+1 : len(keyBytes)])
 
 		// get count for this bucket
 		reply2, err := c.Do("GET", string(keyBytes))
@@ -101,6 +101,5 @@ func bucketDataForHost(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(js)
-
 
 }

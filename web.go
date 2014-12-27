@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"github.com/garyburd/redigo/redis"
+	"github.com/soveran/redisurl"
 	"net/http"
-	"net/url"
 	"os"
 )
 
@@ -13,13 +13,11 @@ var (
 )
 
 func main() {
-	redisUrl, _ := url.Parse(os.Getenv("REDISCLOUD_URL"))
-
 	redisPool = redis.Pool{
 		MaxIdle:   50,
 		MaxActive: 500, // max number of connections
 		Dial: func() (redis.Conn, error) {
-			c, err := redis.Dial("tcp", redisUrl.Host)
+			c, err := redisurl.ConnectToURL(os.Getenv("REDISCLOUD_URL"))
 			if err != nil {
 				panic(err.Error())
 			}
