@@ -15,6 +15,7 @@ func statsForAllHosts(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Printf("Error: %v\n", err)
 		http.Error(w, "oops", http.StatusInternalServerError)
+		return
 	}
 
 	// Prepare map for final results

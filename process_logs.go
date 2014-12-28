@@ -1,12 +1,12 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
+	"bufio"
+	"time"
+	"net/http"
 	"github.com/bmizerany/lpx"
 	"github.com/kr/logfmt"
-	"net/http"
-	"time"
 )
 
 // This struct and the method below takes care of capturing the data we need
@@ -37,8 +37,12 @@ func processLogs(w http.ResponseWriter, r *http.Request) {
 			if err := logfmt.Unmarshal(lp.Bytes(), rl); err != nil {
 				fmt.Printf("Error parsing log line: %v\n", err)
 			} else {
-				timeBucket := timestamp2Bucket(lp.Header().Time)
-				_, err := c.Do("INCR", fmt.Sprintf("%v:%v", rl.host, timeBucket))
+				timeBucket, err := timestamp2Bucket(lp.Header().Time)
+				if err != nil {
+					fmt.Printf("Error parsing time: %v", err)
+					continue
+				}
+				_, err = c.Do("INCR", fmt.Sprintf("%v:%v", rl.host, timeBucket))
 				if err != nil {
 					fmt.Printf("Error running INCR on Redis: %v\n", err)
 				}
@@ -55,10 +59,10 @@ func processLogs(w http.ResponseWriter, r *http.Request) {
 // Heroku log lines are formatted according to RFC5424 which is a subset
 // of RFC3339 (RFC5424 is more restrictive).
 // Reference: https://devcenter.heroku.com/articles/logging#log-format
-func timestamp2Bucket(b []byte) int64 {
+func timestamp2Bucket(b []byte) (int64, error) {
 	t, err := time.Parse(time.RFC3339, string(b))
 	if err != nil {
-		fmt.Println(err)
+		return 0, err
 	}
-	return (t.Unix() / 60) * 60
+	return (t.Unix() / 60) * 60, nil
 }
